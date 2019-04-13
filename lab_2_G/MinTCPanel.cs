@@ -15,6 +15,13 @@ namespace lab_2_G
     {
         #region Prop
 
+        public AutoCompleteStringCollection AutocompleteSuggestPath
+        {
+            //set { textBox1.AutoCompleteCustomSource = value; }
+
+            set { textBox1.AutoCompleteCustomSource = value; }
+        }
+
         public string ItemToCopy
         {
             get { return listBox1.GetItemText(listBox1.SelectedItem); }
@@ -71,6 +78,7 @@ namespace lab_2_G
 
         public event Action SelectDrive;
         public event Action PathChanged;
+        public event Action SelectedItem;
 
         #endregion
         public MinTCPanel()
@@ -100,10 +108,23 @@ namespace lab_2_G
         {
             if(e.KeyData == Keys.Enter)
             {
-                Console.WriteLine("XD");
                 if (PathChanged != null)
                     PathChanged();
                 listBox1.Focus();
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (SelectedItem != null)
+                    SelectedItem();
             }
         }
     }

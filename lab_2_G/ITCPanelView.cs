@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace lab_2_G
 {
@@ -16,7 +17,10 @@ namespace lab_2_G
         string[] DirectoryElements { set; }
         string[] Drives { set; }
 
+        AutoCompleteStringCollection AutocompleteSuggestPath { set; }
+
         event Action SelectDrive;
         event Action PathChanged;
+        event Action SelectedItem;
     }
 }

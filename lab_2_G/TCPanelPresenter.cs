@@ -23,6 +23,12 @@ namespace lab_2_G
 
             this.view.SelectDrive += SetPath;
             this.view.PathChanged += LoadDirectoryElements;
+            this.view.SelectedItem += GoToDirecotry;
+        }
+
+        private void GoToDirecotry()
+        {
+            this.model.ChangeDirecotry(view.CurrentPath, view.ItemToCopy);
         }
 
         private void initDrives()
@@ -38,7 +44,15 @@ namespace lab_2_G
 
         private void LoadDirectoryElements()
         {
-            this.view.DirectoryElements = this.model.GetDirectoryElements(view.CurrentPath);
+
+            if(this.model.GetDirectoryElements(view.CurrentPath) != null)
+            {
+                this.view.DirectoryElements = this.model.GetDirectoryElements(view.CurrentPath);
+            }
+            else
+            {
+                this.SetPath();
+            }
         }
 
         private void SetDefaultPath()

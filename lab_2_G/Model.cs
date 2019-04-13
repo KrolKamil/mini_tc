@@ -9,6 +9,12 @@ namespace lab_2_G
 {
     public class Model
     {
+
+        public void ChangeDirecotry(string coreDirectory, string toGoDirectory)
+        {
+
+        }
+
         public string[] GetDrives()
         {
             return Directory.GetLogicalDrives();
@@ -53,7 +59,7 @@ namespace lab_2_G
             return null;
         }
 
-        /*
+        
         public void CopyData(ITCPanelView left, ITCPanelView right)
         {
             String SelectedItemToCopy = left.ItemToCopy.Trim();
@@ -66,21 +72,28 @@ namespace lab_2_G
 
             if ( (SelectedPathFromCopy != "") && (SelectedItemToCopy != "") )
             {
-                Console.WriteLine("Im in");
-                SelectedItemToCopy = SelectedItemToCopy.Substring(3);
-                
-                if(Directory.Exists(SelectedPathFromCopy))
+                if(SelectedItemToCopy[0] == 'F')
                 {
+                    SelectedItemToCopy = SelectedItemToCopy.Substring(3);
+                    //add back slash for path
                     if (!SelectedPathFromCopy[SelectedPathFromCopy.Length - 1].Equals('\\'))
                     {
                         SelectedPathFromCopy += "\\";
                     }
 
-                    String PathAndItem = SelectedPathFromCopy + SelectedItemToCopy;
-
-                    if ((Directory.Exists(PathAndItem) || File.Exists(PathAndItem)))
+                    if (!DestinatnionPath[DestinatnionPath.Length - 1].Equals('\\'))
                     {
-                        
+                        DestinatnionPath += "\\";
+                    }
+
+                    String PathAndItem = String.Concat(SelectedPathFromCopy, SelectedItemToCopy);
+                    DestinatnionPath = String.Concat(DestinatnionPath, SelectedItemToCopy);
+                    //TUTAJ JEST Z DUPY POTENCJALNY BLAD XD
+
+                    if(DestinatnionPath != "")
+                    {
+                        File.Copy(PathAndItem, DestinatnionPath);
+                        Console.WriteLine("Cos sobie skopiowalem Beka");
                     }
 
                 }
@@ -90,7 +103,7 @@ namespace lab_2_G
 
             //Console.WriteLine(PathAndItem);
         }
-        */
+        
 
     }
 }
