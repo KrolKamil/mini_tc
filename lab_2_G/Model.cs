@@ -14,6 +14,13 @@ namespace lab_2_G
             return Directory.GetLogicalDrives();
         }
 
+        public string GetDefaultDrive()
+        {
+            string[] drives = this.GetDrives();
+            Console.WriteLine(drives[0]);
+            return drives[0];
+        }
+
         public string[] GetDirectoryElements(string InputPath)
         {
             if(Directory.Exists(InputPath))

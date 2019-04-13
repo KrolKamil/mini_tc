@@ -66,7 +66,6 @@ namespace lab_2_G
 
         public event Action SelectDrive;
         public event Action PathChanged;
-             
 
         #endregion
         public MinTCPanel()
@@ -74,17 +73,31 @@ namespace lab_2_G
             InitializeComponent();
         }
 
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if(SelectDrive!=null)
-                    SelectDrive();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
             if (PathChanged != null)
                 PathChanged();
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.Enter)
+            {
+                Console.WriteLine("XD");
+                if (PathChanged != null)
+                    PathChanged();
+                listBox1.Focus();
+            }
         }
     }
 }
