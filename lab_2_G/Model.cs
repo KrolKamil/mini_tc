@@ -162,11 +162,13 @@ namespace lab_2_G
                     }
 
                     String PathAndItem = String.Concat(SelectedPathFromCopy, SelectedItemToCopy);
+                    DestinatnionPath = DestinatnionPath + "\\" + SelectedItemToCopy;
 
                     if (DestinatnionPath != "")
                     {
                         try
                         {
+                            Directory.CreateDirectory(DestinatnionPath);
                             DirectoryCopy(PathAndItem, DestinatnionPath, true);
                         }
                         catch(Exception e)
