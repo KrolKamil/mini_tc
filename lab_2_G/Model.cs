@@ -59,8 +59,46 @@ namespace lab_2_G
             return null;
         }
 
-        
-        public void CopyData(ITCPanelView left, ITCPanelView right)
+        private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            // Get the subdirectories for the specified directory.
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            DirectoryInfo[] dirs = dir.GetDirectories();
+            // If the destination directory doesn't exist, create it.
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+            // Get the files in the directory and copy them to the new location.
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string temppath = Path.Combine(destDirName, file.Name);
+                file.CopyTo(temppath, false);
+            }
+
+            // If copying subdirectories, copy them and their contents to new location.
+            if (copySubDirs)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string temppath = Path.Combine(destDirName, subdir.Name);
+                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                }
+            }
+        }
+
+
+        public string CopyData(ITCPanelView left, ITCPanelView right)
         {
             String SelectedItemToCopy = left.ItemToCopy.Trim();
             String SelectedPathFromCopy = left.CurrentPath.Trim();
@@ -88,21 +126,63 @@ namespace lab_2_G
 
                     String PathAndItem = String.Concat(SelectedPathFromCopy, SelectedItemToCopy);
                     DestinatnionPath = String.Concat(DestinatnionPath, SelectedItemToCopy);
-                    //TUTAJ JEST Z DUPY POTENCJALNY BLAD XD
 
                     if(DestinatnionPath != "")
                     {
                         if(!File.Exists(DestinatnionPath))
                         {
-                            File.Copy(PathAndItem, DestinatnionPath);
-                            Console.WriteLine("Cos sobie skopiowalem Beka");
+                            try
+                            {
+                                File.Copy(PathAndItem, DestinatnionPath);
+                            }
+                            catch(Exception e)
+                            {
+                                return "Brak dostepu";
+                            }
+
+                        }
+                        else
+                        {
+                            return "Nie mozna nadpisac pliku";
+                        }
+                    }
+                }
+                else
+                {
+                    SelectedItemToCopy = SelectedItemToCopy.Substring(3);
+                    //add back slash for path
+                    if (!SelectedPathFromCopy[SelectedPathFromCopy.Length - 1].Equals('\\'))
+                    {
+                        SelectedPathFromCopy += "\\";
+                    }
+
+                    if (!DestinatnionPath[DestinatnionPath.Length - 1].Equals('\\'))
+                    {
+                        DestinatnionPath += "\\";
+                    }
+
+                    String PathAndItem = String.Concat(SelectedPathFromCopy, SelectedItemToCopy);
+
+                    if (DestinatnionPath != "")
+                    {
+                        try
+                        {
+                            DirectoryCopy(PathAndItem, DestinatnionPath, true);
+                        }
+                        catch(Exception e)
+                        {
+                            return "Brak praw do kopiowania";
                         }
                     }
 
                 }
             }
+            else
+            {
+                return "Wybierz element do skopiowania";
+            }
 
-            
+            return "";
 
             //Console.WriteLine(PathAndItem);
         }

@@ -21,7 +21,7 @@ namespace lab_2_G
 
         public void CopyElement()
         {
-            model.CopyData(view.LeftPanel, view.RightPanel);
+            view.Error = model.CopyData(view.LeftPanel, view.RightPanel);
 
             //refresh RightPanelElements
             view.RightPanel.DirectoryElements = model.GetDirectoryElements(view.RightPanel.CurrentPath);

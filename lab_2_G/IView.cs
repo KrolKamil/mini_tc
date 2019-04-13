@@ -11,6 +11,8 @@ namespace lab_2_G
         ITCPanelView LeftPanel { get; }
         ITCPanelView RightPanel { get; }
 
+        String Error { set; }
+
         event Action CopyItem;
     }
 

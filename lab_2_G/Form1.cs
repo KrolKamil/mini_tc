@@ -16,6 +16,11 @@ namespace lab_2_G
 
         public event Action CopyItem;
 
+        public String Error
+        {
+            set { label1.Text = value; }
+        }
+
         public Form1()
         {
             InitializeComponent();
