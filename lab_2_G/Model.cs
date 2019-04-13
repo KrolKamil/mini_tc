@@ -92,8 +92,11 @@ namespace lab_2_G
 
                     if(DestinatnionPath != "")
                     {
-                        File.Copy(PathAndItem, DestinatnionPath);
-                        Console.WriteLine("Cos sobie skopiowalem Beka");
+                        if(!File.Exists(DestinatnionPath))
+                        {
+                            File.Copy(PathAndItem, DestinatnionPath);
+                            Console.WriteLine("Cos sobie skopiowalem Beka");
+                        }
                     }
 
                 }
