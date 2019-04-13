@@ -53,6 +53,7 @@ namespace lab_2_G
             return null;
         }
 
+        /*
         public void CopyData(ITCPanelView left, ITCPanelView right)
         {
             String SelectedItemToCopy = left.ItemToCopy.Trim();
@@ -60,12 +61,12 @@ namespace lab_2_G
 
             String DestinatnionPath = right.CurrentPath;
 
-            //Console.WriteLine(SelectedPathFromCopy);
-            //Console.WriteLine(SelectedItemToCopy);
+            Console.WriteLine(SelectedPathFromCopy);
+            Console.WriteLine(SelectedItemToCopy);
 
             if ( (SelectedPathFromCopy != "") && (SelectedItemToCopy != "") )
             {
-                //Console.WriteLine("Im in");
+                Console.WriteLine("Im in");
                 SelectedItemToCopy = SelectedItemToCopy.Substring(3);
                 
                 if(Directory.Exists(SelectedPathFromCopy))
@@ -89,6 +90,7 @@ namespace lab_2_G
 
             //Console.WriteLine(PathAndItem);
         }
+        */
 
     }
 }

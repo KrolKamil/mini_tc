@@ -16,9 +16,9 @@ namespace lab_2_G
             this.view = view;
             this.model = model;
 
-
-            SetDefaultPath();
             initDrives();
+            SetDefaultPath();
+            SetDefaultDirectory();
             LoadDirectoryElements();
 
             this.view.SelectDrive += SetPath;
@@ -33,6 +33,7 @@ namespace lab_2_G
         private void SetPath()
         {
             this.view.CurrentPath = this.view.CurrentDrive;
+            this.view.DirectoryElements = this.model.GetDirectoryElements(view.CurrentPath);
         }
 
         private void LoadDirectoryElements()
@@ -43,6 +44,11 @@ namespace lab_2_G
         private void SetDefaultPath()
         {
             this.view.CurrentPath = model.GetDefaultDrive();
+        }
+
+        private void SetDefaultDirectory()
+        {
+            this.view.DefaultDirectory = 0;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace lab_2_G
 
         public void CopyElement()
         {
-            model.CopyData(view.LeftPanel, view.RightPanel);
+            //model.CopyData(view.LeftPanel, view.RightPanel);
         }
     }
 }

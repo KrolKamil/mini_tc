@@ -11,6 +11,7 @@ namespace lab_2_G
         string CurrentPath { get; set; }
         string CurrentDrive { get; }
         string ItemToCopy { get; }
+        int DefaultDirectory { set; }
 
         string[] DirectoryElements { set; }
         string[] Drives { set; }

@@ -20,6 +20,11 @@ namespace lab_2_G
             get { return listBox1.GetItemText(listBox1.SelectedItem); }
         }
 
+        public int DefaultDirectory
+        {
+            set{ comboBox1.SelectedIndex = value; }
+        }
+
         public string CurrentPath {
             get {
                 return textBox1.Text;
@@ -76,11 +81,13 @@ namespace lab_2_G
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (SelectDrive != null)
+                SelectDrive();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
